@@ -16,11 +16,18 @@ import {
 } from '@fortawesome/free-brands-svg-icons';
 import { StrapiService } from './services/strapi.service';
 import { Project } from './types/project.interface';
+import { ProjectCardComponent } from './components/project-card/project-card.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, FontAwesomeModule, CommonModule, MarkdownModule],
+  imports: [
+    RouterOutlet,
+    FontAwesomeModule,
+    CommonModule,
+    MarkdownModule,
+    ProjectCardComponent,
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })

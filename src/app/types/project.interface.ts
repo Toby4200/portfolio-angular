@@ -1,6 +1,9 @@
 export interface Project {
   id: number;
   documentId: string;
+  title: string;
+  description: string;
+  category: string;
   content: string | null;
   content_md: string;
   createdAt: string;

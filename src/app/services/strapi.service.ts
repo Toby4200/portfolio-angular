@@ -9,7 +9,8 @@ import { ProjectsResponse } from '../types/project.interface';
 export class StrapiService {
   private baseUrl: string = 'https://grant-api.tobybabin.site/api';
   // read only
-  private apiToken: string = '';
+  private apiToken: string =
+    '46dbcb1b929c070f09453f1672fdbf61f287abdeeaff92409ea4bee2980af2bf2bb9278ca4c5eb329e03b0283489a9d46e26602e96ff025d0c5f60c5275624581355d3efa8433c21e0ab7c6d02c6ada37f74c68e1812f949537710cf4404e3410f81818cdd55c1fb057c691dedc93c8f3874a651a51429805aeda84a2572421d';
 
   constructor(private http: HttpClient) {}
 
