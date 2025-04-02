@@ -1,15 +1,16 @@
 export interface Project {
   id: number;
   documentId: string;
-  title: string;
-  description: string;
-  category: string;
+  title: string | null;
+  description: string | null;
+  category: string | null;
   content: string | null;
-  content_md: string;
+  content_md: string | null;
   createdAt: string;
   updatedAt: string;
   publishedAt: string;
   locale: string;
+  size: 'xlarge' | 'large' | 'medium' | 'small' | null;
   cover: {
     id: number;
     documentId: string;

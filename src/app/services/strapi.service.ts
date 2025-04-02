@@ -1,7 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { ProjectsResponse } from '../types/project.interface';
+import { ProjectsResponse, Project } from '../types/project.interface';
+
+export interface SingleProjectResponse {
+  data: Project;
+  meta: {};
+}
 
 @Injectable({
   providedIn: 'root',
@@ -22,6 +27,10 @@ export class StrapiService {
 
   getProjects(): Observable<ProjectsResponse> {
     return this.get<ProjectsResponse>('projects?populate=*');
+  }
+
+  getProject(id: string): Observable<SingleProjectResponse> {
+    return this.get<SingleProjectResponse>(`projects/${id}?populate=*`);
   }
 
   get<T>(endpoint: string): Observable<T> {

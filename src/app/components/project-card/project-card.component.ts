@@ -1,19 +1,14 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
+import { Project } from '../../types/project.interface';
 
 export type ProjectCardSize = 'xlarge' | 'large' | 'medium' | 'small';
-
-export interface ProjectCardData {
-  title: string;
-  description?: string;
-  category: string;
-  imageUrl?: string;
-}
 
 @Component({
   selector: 'app-project-card',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   template: `
     <article
       class="card"
@@ -21,13 +16,18 @@ export interface ProjectCardData {
       [class.card--large]="size === 'large'"
       [class.card--medium]="size === 'medium'"
       [class.card--small]="size === 'small'"
+      [routerLink]="['/projects', project.documentId]"
     >
       <!-- Image Section -->
       <div
         class="card__image-wrapper"
-        *ngIf="size !== 'small' && data.imageUrl"
+        *ngIf="size !== 'small' && project.cover?.url"
       >
-        <img [src]="data.imageUrl" [alt]="data.title" class="card__image" />
+        <img
+          [src]="'https://grant-api.tobybabin.site' + project.cover.url"
+          [alt]="project.title || 'Project Image'"
+          class="card__image"
+        />
       </div>
 
       <!-- Content Section -->
@@ -35,13 +35,15 @@ export interface ProjectCardData {
         class="card__content"
         [class.card__content--small]="size === 'small'"
       >
-        <span class="card__category">{{ data.category }}</span>
-        <h3 class="card__title">{{ data.title }}</h3>
+        <span class="card__category">{{
+          project.category || 'Uncategorized'
+        }}</span>
+        <h3 class="card__title">{{ project.title || 'Untitled Project' }}</h3>
         <p
           class="card__description"
-          *ngIf="data.description && (size === 'xlarge' || size === 'large')"
+          *ngIf="project.description && (size === 'xlarge' || size === 'large')"
         >
-          {{ data.description }}
+          {{ project.description }}
         </p>
       </div>
     </article>
@@ -50,5 +52,5 @@ export interface ProjectCardData {
 })
 export class ProjectCardComponent {
   @Input() size: ProjectCardSize = 'medium';
-  @Input({ required: true }) data!: ProjectCardData;
+  @Input({ required: true }) project!: Project;
 }
